@@ -37,3 +37,8 @@ def detail(request,pk):
         'comment_list':comment_list
     }
     return render(request,'blog/detail.html',context=context)
+
+def archives(request,year,month):
+    post_list=Post.objects.filter(created_time_year=year,
+                                  created_time_month=month)
+    return render(request,'blog/index.html',context={'post_list':post_list})
