@@ -38,7 +38,14 @@ def detail(request,pk):
     }
     return render(request,'blog/detail.html',context=context)
 
-def archives(request,year,month):
-    post_list=Post.objects.filter(created_time_year=year,
-                                  created_time_month=month)
-    return render(request,'blog/index.html',context={'post_list':post_list})
+# def archives(request,year,month):
+#     post_list=Post.objects.filter(created_time_year=year,
+#                                   created_time_month=month)
+#     return render(request,'blog/index.html',context={'post_list':post_list})
+
+#注意注意！！！！！！！！！！！！！！！！！！！created_time__year/created_time__month
+def archives(request, year, month):
+    post_list = Post.objects.filter(created_time__year=year,
+                                    created_time__month=month
+                                    ).order_by('-created_time')
+    return render(request, 'blog/index.html', context={'post_list': post_list})

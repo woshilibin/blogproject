@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load blog_tags %}
 {% block main %}
     {% for post in post_list %}
                     <article class="post post-{{ post_list }}">
