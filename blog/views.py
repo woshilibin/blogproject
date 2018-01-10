@@ -47,5 +47,5 @@ def detail(request,pk):
 def archives(request, year, month):
     post_list = Post.objects.filter(created_time__year=year,
                                     created_time__month=month
-                                    ).order_by('-created_time')
+                                    )
     return render(request, 'blog/index.html', context={'post_list': post_list})
