@@ -21,6 +21,9 @@ class Post(models.Model):
     category=models.ForeignKey(Category,on_delete=models.CASCADE)
     tags=models.ManyToManyField(Tag,blank=True)
     author=models.ForeignKey(User,on_delete=models.CASCADE)
+    views=models.PositiveIntegerField(default=0)
+
+
 
 
     def __str__(self):
@@ -30,3 +33,6 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_time']
+    def increase_views(self):
+        self.views +=1
+        self.save(update_fields=['views'])
