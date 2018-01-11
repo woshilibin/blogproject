@@ -57,9 +57,22 @@ def detail(request,pk):
 #                                     created_time__month=month
 #                                     )
 #     return render(request, 'blog/index.html', context={'post_list': post_list})
-class ArchivesView(IndexViews):
+class ArchivesView(ListView):
+    model = Post
+    template_name = 'blog/index.html'
+    context_object_name = 'post_list'
     def get_queryset(self):
-        atchives=get_object_or_404()
+        year=self.kwargs.get('year')
+        month=self.kwargs.get('month')
+        return super(ArchivesView,self).get_queryset().filter(created_time__year=year,
+                                    created_time__month=month)
+
+
+# def category(request, pk):
+#     # 记得在开始部分导入 Category 类
+#     cate = get_object_or_404(Category, pk=pk)
+#     post_list = Post.objects.filter(category=cate).order_by('-created_time')
+#     return render(request, 'blog/index.html', context={'post_list': post_list})
 
 
 # class CategoryView(ListView):
